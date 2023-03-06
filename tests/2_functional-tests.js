@@ -12,7 +12,7 @@ suite('Functional Tests', function() {
         .post('/api/issues/test')
         .send({issue_title: 'Test', issue_text: 'Test', created_by: 'Sa-Yoor', assigned_to: 'Another User', status_text: 'Test' })
         .end((error, res) => {
-            // console.log(res.body)
+            // // console.log(res.body)
             assert.strictEqual(res.status, 200)
             assert.strictEqual(res.body.issue_title, 'Test')
             assert.strictEqual(res.body.issue_text, 'Test')
@@ -84,26 +84,28 @@ suite('Functional Tests', function() {
         chai
         .request(server)
         .put('/api/issues/fcc-project')
-        .send({_id: '640218492aa12ead6207b736', issue_text: 'New Issue Text'})
+        .send({_id: '6402442e89bb433eadb9582c', issue_text: 'New Issue Text'})
         .end((error, res) => {
             console.log('Update one field on an issue: PUT request to /api/issues/{project}')
-            console.log(res.body)
+            // console.log(res.body)
             assert.strictEqual(res.status, 200)
             assert.strictEqual(res.body.result, 'successfully updated')
-            assert.strictEqual(res.body._id, '640218492aa12ead6207b736')
+            assert.strictEqual(res.body._id, '6402442e89bb433eadb9582c')
         })
     })
     test('Update multiple fields on an issue: PUT request to /api/issues/{project}', () => {
         chai
         .request(server)
         .put('/api/issues/test')
-        .send({_id: '6402024c40b7ac6db0d708c8', issue_text: 'New Issue Text Updated', assigned_to: 'Another User'})
+        .send({_id: '64024475addf72ee40b0713d', issue_text: 'New Issue Text Updated', open: false})
         .end((error, res) => {
             console.log('Update multiple fields on an issue: PUT request to /api/issues/{project}')
+            console.log('*********************************************************')
             console.log(res.body)
+            console.log('*********************************************************')
             assert.strictEqual(res.status, 200)
             assert.strictEqual(res.body.result, 'successfully updated')
-            assert.strictEqual(res.body._id, '6402024c40b7ac6db0d708c8')
+            assert.strictEqual(res.body._id, '64024475addf72ee40b0713d')
         })
     })
     test('Update an issue with missing _id: PUT request to /api/issues/{project}', () => {
@@ -113,7 +115,7 @@ suite('Functional Tests', function() {
         .send({ issue_text: 'New Issue Text Updated 2' })
         .end((error, res) => {
             console.log('Update an issue with missing _id: PUT request to /api/issues/{project}')
-            console.log(res.body)
+            // console.log(res.body)
             assert.strictEqual(res.status, 200)
             assert.strictEqual(res.body.error, 'missing _id')
         })
@@ -125,7 +127,7 @@ suite('Functional Tests', function() {
         .send({ _id: '6402024c40b7ac6db0d708c8' })
         .end((error, res) => {
             console.log('Update an issue with no fields to update: PUT request to /api/issues/{project}')
-            console.log(res.body)
+            // console.log(res.body)
             assert.strictEqual(res.status, 200)
             assert.strictEqual(res.body._id, '6402024c40b7ac6db0d708c8')
             assert.strictEqual(res.body.error, 'no update field(s) sent')
@@ -138,7 +140,7 @@ suite('Functional Tests', function() {
         .send({_id: '1', issue_text: 'New Issue Text Updated', assigned_to: 'Another User'})
         .end((error, res) => {
             console.log('Update an issue with an invalid _id: PUT request to /api/issues/{project}')
-            console.log(res.body)
+            // console.log(res.body)
             assert.strictEqual(res.status, 200)
             assert.strictEqual(res.body._id, '1')
             assert.strictEqual(res.body.error, 'could not update')
@@ -148,12 +150,12 @@ suite('Functional Tests', function() {
         chai
         .request(server)
         .delete('/api/issues/test')
-        .send({_id: '6401f56e54d3609ad8e6fe93'})
+        .send({_id: '6402453dcdeffffc0b7b8def'})
         .end((error, res) => {
             console.log('Delete an issue: DELETE request to /api/issues/{project}')
-            console.log(res.body)
+            // console.log(res.body)
             assert.strictEqual(res.status, 200)
-            assert.strictEqual(res.body._id, '6401f56e54d3609ad8e6fe93')
+            assert.strictEqual(res.body._id, '6402453dcdeffffc0b7b8def')
             assert.strictEqual(res.body.result, 'successfully deleted')
         })
     })
@@ -164,7 +166,7 @@ suite('Functional Tests', function() {
         .send({_id: '1'})
         .end((error, res) => {
             console.log('Delete an issue with an invalid _id: DELETE request to /api/issues/{project}')
-            console.log(res.body)
+            // console.log(res.body)
             assert.strictEqual(res.status, 200)
             assert.strictEqual(res.body._id, '1')
             assert.strictEqual(res.body.error, 'could not delete')
@@ -176,7 +178,7 @@ suite('Functional Tests', function() {
         .delete('/api/issues/test')
         .end((error, res) => {
             console.log('Delete an issue with missing _id: DELETE request to /api/issues/{project}')
-            console.log(res.body)
+            // console.log(res.body)
             assert.strictEqual(res.status, 200)
             assert.strictEqual(res.body.error, 'missing _id')
         })

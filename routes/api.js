@@ -108,17 +108,14 @@ module.exports = function (app) {
 
       Issue.findOneAndUpdate({ _id, project }, fieldsToUpdate, {new: true})
       .then(issue => {
-        if(issue){
+        if(issue || Object.keys(issue).length !== 0){
           console.log('issue')
           console.log(issue)
-          console.log({ result: 'successfully updated', _id })
           return res.json({ result: 'successfully updated', _id })
         }
       })
       .catch(error => {
         console.log('error') 
-        console.log(error) 
-        console.log({ error: 'could not update', _id })
         return res.json({ error: 'could not update', _id }) 
       })
     })
@@ -136,7 +133,7 @@ module.exports = function (app) {
 
       Issue.findOneAndDelete({ project, _id })
       .then(data => { 
-        if(data){
+        if(data || Object.keys(data).length !== 0){
           console.log('data')
           console.log(data)
           return res.json({ result: 'successfully deleted', '_id': _id }) 
